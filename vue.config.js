@@ -1,21 +1,17 @@
-const { defineConfig } = require("@vue/cli-service");
-// const path = require("path");
-module.exports = defineConfig({
+module.exports = {
   transpileDependencies: true,
-  productionSourceMap: false,
-  // configureWebpack: {
-  //   resolve: {
-  //     extensions: [".js", ".vue", ".json"],
-  //     alias: {
-  //       "@": path.resolve(__dirname, "./src"),
-  //     },
-  //   },
-  // },
+  productionSourceMap: process.env.NODE_ENV === "development",
+  lintOnSave: process.env.NODE_ENV === "development", // 开启eslint
+  publicPath: "/",
+  devServer: {
+    port: 9030,
+  },
   css: {
     loaderOptions: {
       sass: {
+        // 全局scss变量
         additionalData: `@import "@/assets/css/base.scss";`,
       },
     },
   },
-});
+};
